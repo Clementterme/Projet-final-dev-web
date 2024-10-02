@@ -1,5 +1,3 @@
 <?php
 
-?>
-
-<h1>Hello World</h1>
+require_once __DIR__ . "/../src/init.php";
