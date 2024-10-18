@@ -3,13 +3,16 @@
 // require_once __DIR__.'/Repositories/UsersRepository.php';
 require_once __DIR__ . '/Controllers/HomeController.php';
 require_once __DIR__ . '/Controllers/ConnexionController.php';
+require_once __DIR__ . '/Controllers/BibliothequeController.php';
 
-$uri = $_SERVER['REQUEST_URI'];
 $methode = $_SERVER['REQUEST_METHOD'];
 
 $homeController = new HomeController();
 $connexionController = new ConnexionController();
+$bibliothequeController = new BibliothequeController();
 // $simplonController = new SimplonController();
+
+$uri = $_SERVER['REQUEST_URI'];
 
 switch ($uri) {
     case HOME_URL . "":
@@ -22,11 +25,11 @@ switch ($uri) {
             $connexionController->handleFormSubmission();
         }
         break;
-    case HOME_URL . "dashboard":
+    case HOME_URL . "bibliotheque":
         if ($methode == 'GET') {
-            $connexionController->homepage();
+            $bibliothequeController->homepage();
         } else if ($methode == 'POST') {
-            header("location: dashboard");
+            header("location: bibliotheque");
         }
         break;
     case HOME_URL . "dashboardFormateur":
