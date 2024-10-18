@@ -16,8 +16,8 @@ if ($idAnime > 0) {
 
     if ($anime) {
         // Change l'affichage de la date au format JJ-MM-AAAA
-        list($annee,$mois,$jour)=explode('-',$anime['date_sortie']);
-        $nouvelle_date = $jour.'-'.$mois.'-'.$annee;
+        list($annee, $mois, $jour) = explode('-', $anime['date_sortie']);
+        $nouvelle_date = $jour . '-' . $mois . '-' . $annee;
         // Affichage des détails de l'anime
         echo '<h1>' . $anime['nom'] . '</h1>
                 <div class="affichageImageAnimeDetail">
@@ -29,10 +29,13 @@ if ($idAnime > 0) {
                         </div>
                 </div>';
     } else {
-        echo 'Anime non trouvé.';
+
+        header('location: ' . HOME_URL . '404.php');
     }
 } else {
-    echo 'Aucun identifiant d\'anime spécifié.';
+
+    header('location: ' . HOME_URL . '404.php');
+
 }
 
 require_once __DIR__ . "/../Includes/footer.php";
