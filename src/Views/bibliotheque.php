@@ -9,17 +9,20 @@ require_once __DIR__ . "/../Includes/header.php";
         <div class="cartesAnimes">
 
             <?php
-            // Afficher les animes existantes
+            // Afficher les animes existants
             $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8;", DB_USER, DB_PWD);
 
             $requete = "SELECT * FROM anime;";
             $resultat = $bdd->query($requete);
             while ($ligne = $resultat->fetch()) {
                 echo '
+                <a href="details.php?id=' . $ligne['id'] . '">
                 <div class="carteAnime">
                     <img class="imageAnime" src=' . $ligne['image'] . '>
                     <p class="nomAnime">' . $ligne['nom'] . '</p>
-                </div>';
+                </div>
+                </a>';
+                
             } ?>
 
         </div>
