@@ -45,18 +45,7 @@ if (strpos($parsedUri, HOME_URL . "details") !== false) {
             }
             break;
         case HOME_URL . "bibliotheque":
-            if ($methode == 'GET') {
                 $bibliothequeController->homepage();
-            } else if ($methode == 'POST') {
-                header("location: bibliotheque");
-            }
-            break;
-        case HOME_URL . "dashboardFormateur":
-            if ($methode == 'GET') {
-                $connexionController->homepageFormateur();
-            } else if ($methode == 'POST') {
-                header("location: dashboardFormateur");
-            }
             break;
         case HOME_URL . 'deconnexion':
             $homeController->quit();
@@ -66,4 +55,3 @@ if (strpos($parsedUri, HOME_URL . "details") !== false) {
             break;
     }
 }
-

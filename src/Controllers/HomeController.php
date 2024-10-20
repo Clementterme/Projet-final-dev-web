@@ -17,7 +17,7 @@ class HomeController
     public function quit()
     {
       session_destroy();
-      header('location: '.HOME_URL);
+      header('location: '. HOME_URL . 'connexion');
       die();
     }
 }
