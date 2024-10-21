@@ -6,6 +6,9 @@ require_once __DIR__ . "/../Includes/header.php";
 
 <div class="accueil">
     <h1>Bienvenue sur TrouvAnime !</h1>
+        <?php
+
+        var_dump($_SESSION); ?>
 
     <p>Tu ne trouves pas d’anime à regarder ? Ce site est fait pour toi !</p>
 
@@ -29,3 +32,4 @@ require_once __DIR__ . "/../Includes/header.php";
 <?php
 
 require_once __DIR__ . "/../Includes/footer.php";
+    

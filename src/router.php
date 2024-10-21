@@ -39,13 +39,28 @@ if (strpos($parsedUri, HOME_URL . "details") !== false) {
             break;
         case HOME_URL . "connexion":
             if ($methode == 'GET') {
-                $connexionController->homepage();
+                if (!isset($_SESSION['connecté'])) {
+                    $connexionController->homepage();
+                } else {
+                    $homeController->pageNotFound();
+                }
             } else if ($methode == 'POST') {
-                $connexionController->handleFormSubmission();
+                $connexionController->connexion();
+            }
+            break;
+        case HOME_URL . "inscription":
+            if ($methode == 'GET') {
+                if (!isset($_SESSION['connecté'])) {
+                    $connexionController->homepageInscription();
+                } else {
+                    $homeController->pageNotFound();
+                }
+            } else if ($methode == 'POST') {
+                $connexionController->inscription();
             }
             break;
         case HOME_URL . "bibliotheque":
-                $bibliothequeController->homepage();
+            $bibliothequeController->homepage();
             break;
         case HOME_URL . 'deconnexion':
             $homeController->quit();

@@ -8,15 +8,11 @@ class ConnexionController {
         $this->render("connexion");
     }
 
-    public function homepageFormateur() {
-        $this->render("dashboardFormateur");
+    public function homepageInscription() {
+        $this->render("inscription");
     }
 
-    public function test() {
-        $this->render("test");
-    }
-
-    public function handleFormSubmission() {
+    public function connexion() {
 
         $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8;", DB_USER, DB_PWD);
 
@@ -24,6 +20,7 @@ class ConnexionController {
             if (!empty($_POST["email"]) && !empty($_POST["mdp"])) {
                 $email = htmlspecialchars($_POST['email']);
                 $mdp = htmlspecialchars($_POST['mdp']);
+                // $mdpsafe = password_verify($mdp);
 
                 $selectUser = $bdd->prepare("SELECT * FROM utilisateur WHERE email = ? AND mdp = ?");
                 $selectUser->execute(array($email, $mdp));
@@ -32,7 +29,11 @@ class ConnexionController {
                     $_SESSION["email"] = $email;
                     $_SESSION["mdp"] = $mdp;
 
-                    $_SESSION["role"] = $selectUser->fetch()["id_1"];
+                    // Récupère les données de l'utilisateur qui se connecte pour les stocker dans la variable $_SESSION
+                    $utilisateur = $selectUser->fetch();
+
+                    $_SESSION["role"] = $utilisateur["id_1"];
+                    $_SESSION["id"] = $utilisateur["id"];
 
                     $_SESSION['connecté'] = TRUE;
 
@@ -52,7 +53,47 @@ class ConnexionController {
                 echo "Veuillez remplir tous les champs.";
             }
         }
-
         $this->render("connexion");
+    }
+
+
+    public function inscription() {
+
+        $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8;", DB_USER, DB_PWD);
+
+        if (isset($_POST["envoi"])) {
+            if (!empty($_POST["email"]) && !empty($_POST["mdp"]) && !empty($_POST["mdp2"])) {
+                if ($_POST["mdp"] == ($_POST["mdp2"])) {
+                    $email = htmlspecialchars($_POST['email']);
+                    // $mdp = htmlspecialchars($_POST['mdp']);
+                    $mdp = password_hash($_POST['mdp'], PASSWORD_DEFAULT);
+                    $insertUser = $bdd->prepare("INSERT INTO utilisateur(email, mdp) VALUES(?, ?)");
+                    $insertUser->execute(array($email, $mdp));
+
+
+                    // Récupérer l'utilisateur pour le connecter après son inscription
+                    $selectUser = $bdd->prepare("SELECT * FROM utilisateur WHERE email = ? AND mdp = ?");
+                    $selectUser->execute(array($email, $mdp));
+                    if ($selectUser->rowCount() > 0) {
+                        $_SESSION["email"] = $email;
+                        $_SESSION["mdp"] = $mdp;
+
+                        $utilisateur = $selectUser->fetch();
+
+                        $_SESSION["role"] = $utilisateur["id_1"];
+                        $_SESSION["id"] = $utilisateur["id"];
+
+                        $_SESSION['connecté'] = TRUE;
+                    }
+
+                    header("location: " . HOME_URL);
+                } else {
+                    echo "Les deux mots de passe ne correspondent pas.";
+                }
+            } else {
+                echo "Veuillez remplir tous les champs.";
+            }
+        }
+        $this->render("inscription");
     }
 }
