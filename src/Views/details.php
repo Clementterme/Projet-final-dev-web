@@ -23,7 +23,7 @@ if ($idAnime > 0) {
     if ($anime) {
         // Change l'affichage de la date au format JJ-MM-AAAA
         list($annee, $mois, $jour) = explode('-', $anime['date_sortie']);
-        $nouvelle_date = $jour . '-' . $mois . '-' . $annee;
+        $dateSortie = $jour . '-' . $mois . '-' . $annee;
         // Affichage des détails de l'anime
         echo '<h1>' . $anime['nom'] . '</h1>
                 <div class="affichageImageAnimeDetail">
@@ -31,7 +31,7 @@ if ($idAnime > 0) {
                         <div class="affichageSynopsis">
                             <h2>Synopsis :</h2>
                             <p class="synopsis">' . $anime['synopsis'] . '</p>
-                            <p class="dateSortie">Date de sortie: ' .  $nouvelle_date . '</p>
+                            <p class="dateSortie">Date de sortie: ' .  $dateSortie . '</p>
                             <p>Catégorie: ' .  $categorie['nom'] . '</p>';
         if (isset($_SESSION["connecté"])) { ?>
                     <form method="POST">

@@ -22,8 +22,13 @@ $parsedUri = parse_url($uri, PHP_URL_PATH);
 // Vérifier si l'URI contient le mot "details" suivi d'un paramètre id
 if (strpos($parsedUri, HOME_URL . "details") !== false) {
     if ($methode == 'GET') {
-        // Extraire l'id depuis les paramètres de l'URL
-        $id = isset($_GET['id']) ? intval($_GET['id']) : null;
+        // Extraire l'id depuis l'URL
+        if (isset($_GET['id'])) {
+            $id = intval($_GET['id']);
+        } else {
+            $id = null;
+        }
+        
         if ($id) {
             $detailsController->homepage($id);
         } else {
