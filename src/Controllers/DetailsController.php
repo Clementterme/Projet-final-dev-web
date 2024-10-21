@@ -2,14 +2,10 @@
 
 require_once __DIR__ . '/../Services/Render.php';
 
-class DetailsController
-{
+class DetailsController {
     use Render;
 
-    public function homepage()
-    {
+    public function homepage() {
         $this->render("details");
     }
-
-
 }

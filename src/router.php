@@ -30,7 +30,14 @@ if (strpos($parsedUri, HOME_URL . "details") !== false) {
             $homeController->pageNotFound();
         }
     } else if ($methode == 'POST') {
-        header("location: details");
+        if (isset($_POST["ajouter"])) {
+            $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8;", DB_USER, DB_PWD);
+
+            $ajouterAnime = $bdd->prepare("INSERT INTO `enregistre` (`id`, `id_1`) VALUES(?, ?)");
+            $ajouterAnime->execute(array($_SESSION['id'], $_GET['id']));
+
+            header("location: " . HOME_URL . "liste");
+        }
     }
 } else {
     switch ($parsedUri) {
@@ -68,6 +75,13 @@ if (strpos($parsedUri, HOME_URL . "details") !== false) {
             } else {
                 $homeController->pageNotFound();
             }
+            break;
+            // case HOME_URL . "details":
+            //     if ($methode == 'POST') {
+            //         $detailsController->ajouterListe();
+            //     } else {
+            //         $homeController->pageNotFound();
+            //     }
             break;
         case HOME_URL . 'deconnexion':
             $homeController->quit();
