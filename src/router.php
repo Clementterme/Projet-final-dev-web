@@ -62,6 +62,13 @@ if (strpos($parsedUri, HOME_URL . "details") !== false) {
         case HOME_URL . "bibliotheque":
             $bibliothequeController->homepage();
             break;
+        case HOME_URL . "liste":
+            if (isset($_SESSION['connecté'])) {
+                $bibliothequeController->afficherListe();
+            } else {
+                $homeController->pageNotFound();
+            }
+            break;
         case HOME_URL . 'deconnexion':
             $homeController->quit();
             break;

@@ -12,7 +12,7 @@
     <div class="navbar-links">
         <a class="navbar-item" href="/bibliotheque">Bibliothèque</a>
         <?php if (isset($_SESSION['connecté'])) { ?>
-            <a class="navbar-item" href="/connexion">Ma liste</a>
+            <a class="navbar-item" href="/liste">Ma liste</a>
             <a class="navbar-item" href="/deconnexion">Déconnexion</a>
         <?php } else { ?>
             <a class="navbar-item" href="/connexion">Se connecter</a>

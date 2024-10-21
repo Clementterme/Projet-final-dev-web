@@ -11,5 +11,10 @@ class BibliothequeController
         $this->render("bibliotheque");
     }
 
+    public function afficherListe()
+    {
+        $this->render("liste");
+    }
+
 
 }

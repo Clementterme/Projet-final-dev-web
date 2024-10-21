@@ -14,6 +14,13 @@ if ($idAnime > 0) {
     $requete->execute(['id' => $idAnime]);
     $anime = $requete->fetch();
 
+
+    // Requête pour récupérer la catégorie de l'anime
+    $requete2 = $bdd->prepare("SELECT catégorie.nom FROM catégorie JOIN comporte ON catégorie.id = comporte.id_1 JOIN anime ON anime.id = comporte.id WHERE anime.id = :id;");
+    $requete2->execute(['id' => $idAnime]);
+    $categorie = $requete2->fetch();
+
+
     if ($anime) {
         // Change l'affichage de la date au format JJ-MM-AAAA
         list($annee, $mois, $jour) = explode('-', $anime['date_sortie']);
@@ -25,7 +32,8 @@ if ($idAnime > 0) {
                         <div class="affichageSynopsis">
                             <h2>Synopsis :</h2>
                             <p class="synopsis">' . $anime['synopsis'] . '</p>
-                            <p>Date de sortie: ' .  $nouvelle_date . '</p>
+                            <p class="dateSortie">Date de sortie: ' .  $nouvelle_date . '</p>
+                            <p>Catégorie: ' .  $categorie['nom'] . '</p>
                         </div>
                 </div>';
     } else {
