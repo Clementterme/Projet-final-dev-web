@@ -19,6 +19,10 @@
             <a class="navbar-item" href="/inscription">Créer un compte</a>
         <?php } ?>
     </div>
+    <div class="burger">
+        <span></span>
+        <span></span>
+        <span></span>
 </nav>
 
 <body>
