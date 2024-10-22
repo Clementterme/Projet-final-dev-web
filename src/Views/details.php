@@ -6,7 +6,12 @@ require_once __DIR__ . "/../Includes/header.php";
 $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8;", DB_USER, DB_PWD);
 
 // Récupérer l'id de l'anime depuis l'URL
-$idAnime = isset($_GET['id']) ? intval($_GET['id']) : 0;
+if (isset($_GET['id'])) {
+    $idAnime = intval($_GET['id']);
+} else {
+    $idAnime = 0;
+}
+
 
 if ($idAnime > 0) {
     // Requête pour récupérer les détails de l'anime
