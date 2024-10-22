@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrouvAnime</title>
+    <link rel="icon" href="https://static.vecteezy.com/system/resources/thumbnails/024/571/174/small_2x/anime-black-and-white-isolated-icon-illustration-vector.jpg" />
     <link rel="stylesheet" href="/assets/style.css">
 </head>
 <nav class="navbar">
